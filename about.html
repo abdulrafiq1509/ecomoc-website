@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ECOMOG — About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #000080;
+      --royal: #4169E1;
+      --text: #0a0f1a;
+      --muted: #6c7180;
+      --card-bg: rgba(255,255,255,0.98);
+      --radius: 12px;
+      --max-width: 1200px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      color: var(--text);
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(0,0,128,0.06), rgba(65,105,225,0.02));
+      transition: background 1.2s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page { max-width: var(--max-width); margin: 0 auto; }
+
+    /* Header */
+    header.site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { display: flex; flex-direction: column; }
+    .brand .name { font-size: 20px; font-weight: 700; margin: 0; }
+    .brand .fullname { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .navbar { display: flex; align-items: center; gap: 14px; }
+    .nav-links { display: flex; gap: 10px; align-items: center; }
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .nav-link:hover { background: rgba(255,255,255,0.1); }
+
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      border: 1px solid rgba(6,10,25,0.04);
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      position: relative;
+    }
+    .hamburger span::before, .hamburger span::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      left: 0;
+    }
+    .hamburger span::before { top: -6px; }
+    .hamburger span::after { top: 6px; }
+
+    .top-logo img {
+      height: 46px;
+      width: auto;
+      border-radius: 6px;
+      box-shadow: 0 8px 22px rgba(6,10,25,0.12);
+    }
+
+    /* About content */
+    main {
+      margin-top: 24px;
+    }
+
+    .about-section {
+      background: var(--card-bg);
+      padding: 28px;
+      margin-bottom: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 40px rgba(6,10,25,0.06);
+    }
+
+    .about-section h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: var(--royal);
+      margin-bottom: 10px;
+    }
+
+    .about-section p, .about-section ul {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    ul.values {
+      list-style-type: square;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(90deg, var(--royal), var(--navy));
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(6,10,25,0.12);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 32px;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media(max-width:640px) {
+      body { padding: 16px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <div class="name">ECOMOC</div>
+        <div class="fullname">Economic Community of Market Operations and Commerce</div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav class="navbar" role="navigation">
+          <div class="nav-links" id="navLinks">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="about.html" aria-current="page">About</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+          <button class="hamburger" id="hamburger"><span></span></button>
+        </nav>
+
+        <div class="top-logo">
+          <!-- INSERT YOUR ECOMOG LOGO HERE -->
+          <img src="e-logo.JPG" alt="ECOMOG logo">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="about-section" id="who-we-are">
+        <h2>Who We Are</h2>
+        <p><strong>ECOMOC</strong> is a multi-sectoral organization committed to connecting markets and fostering growth across Africa and beyond. We combine professionalism, innovation, and trust to deliver strategic solutions in trade, logistics, investment, and security operations.</p>
+        <p><em>Empowering businesses across Africa through innovation, professionalism, and trust.</em></p>
+      </section>
+
+      <section class="about-section" id="mission">
+        <h2>Our Mission</h2>
+        <p>To provide reliable, innovative, and sustainable business solutions that empower trade, enhance investment, and promote economic and social development through world-class operational excellence.</p>
+      </section>
+
+      <section class="about-section" id="vision">
+        <h2>Our Vision</h2>
+        <p>To become a globally recognized leader in market operations and commerce, setting the benchmark for professionalism, innovation, and collaboration in every industry we serve.</p>
+      </section>
+
+      <section class="about-section" id="core-values">
+        <h2>Our Core Values</h2>
+        <ul class="values">
+          <li><strong>Professionalism:</strong> We uphold integrity, accountability, and transparency in every operation.</li>
+          <li><strong>Innovation:</strong> We adopt cutting-edge strategies and technologies to achieve excellence.</li>
+          <li><strong>Partnership:</strong> We believe in collaboration that benefits our clients, communities, and stakeholders.</li>
+          <li><strong>Excellence:</strong> We are committed to quality, efficiency, and continuous improvement.</li>
+        </ul>
+
+        <a class="btn" href="services.html">Explore Our Services</a>
+      </section>
+    </main>
+
+    <footer>
+      <small>© <span id="year"></span> ECOMOC — Accra, Ghana</small>
+    </footer>
+  </div>
+
+  <script>
+    // Background animation
+    const bgSteps = [
+      ['#000080','#4169E1'],
+      ['#071043','#335fd6'],
+      ['#00114d','#3b6ee6']
+    ];
+    let i = 0;
+    const body = document.body;
+    function hexToRgb(h){const r=parseInt(h.replace('#',''),16);return`${(r>>16)&255},${(r>>8)&255},${r&255}`;}
+    function updateBG(){const a=bgSteps[i%3][0],b=bgSteps[i%3][1];body.style.background=`linear-gradient(180deg,rgba(${hexToRgb(a)},0.08),rgba(${hexToRgb(b)},0.02))`;i++;}
+    updateBG(); setInterval(updateBG,4000);
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    let menuOpen = false;
+    hamburger.addEventListener('click',()=>{
+      menuOpen = !menuOpen;
+      if(menuOpen){
+        navLinks.style.display='flex';
+        navLinks.style.flexDirection='column';
+        navLinks.style.position='absolute';
+        navLinks.style.right='18px';
+        navLinks.style.top='68px';
+        navLinks.style.background='var(--card-bg)';
+        navLinks.style.padding='10px';
+        navLinks.style.borderRadius='10px';
+        navLinks.style.boxShadow='0 10px 30px rgba(6,10,25,0.12)';
+      } else {
+        navLinks.style.display='';
+        navLinks.style.position='';
+        navLinks.style.background='';
+        navLinks.style.boxShadow='';
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

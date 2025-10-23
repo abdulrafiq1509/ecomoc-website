@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- Basic CSP — adjust for production if you add external resources -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ECOMOC — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy: #000080;
+      --royal: #4169E1;
+      --text: #0a0f1a;
+      --muted: #6c7180;
+      --card-bg: rgba(255,255,255,0.98);
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --max-width: 1200px;
+      --slide-gap: 16px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    /* Reset */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      margin:0;
+      padding:22px;
+      color:var(--text);
+      background: linear-gradient(180deg, rgba(0,0,128,0.06), rgba(65,105,225,0.02));
+      transition: background 1200ms ease;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .page{max-width:var(--max-width);margin:0 auto}
+
+    /* Header */
+    header.site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+    }
+    .brand .name{font-size:20px;font-weight:700;margin:0}
+    .brand .fullname{font-size:12px;color:var(--muted);margin-top:4px}
+
+    /* Navigation */
+    .navbar{display:flex;align-items:center;gap:14px}
+    .nav-links{display:flex;gap:10px;align-items:center}
+    .nav-link{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    .nav-link:hover{background:var(--glass)}
+
+    /* Hamburger for mobile */
+    .hamburger{display:none;width:44px;height:44px;border-radius:8px;align-items:center;justify-content:center;background:var(--card-bg);border:1px solid rgba(6,10,25,0.04);cursor:pointer}
+    .hamburger span{display:block;width:18px;height:2px;background:var(--text);position:relative}
+    .hamburger span::before,.hamburger span::after{content:"";position:absolute;width:18px;height:2px;background:var(--text);left:0}
+    .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
+
+    /* Top-right logo placeholder (small) */
+    .top-logo img{height:46px;width:auto;border-radius:6px;box-shadow:0 8px 22px rgba(6,10,25,0.12)}
+
+    /* Hero / Content card */
+    .hero {
+      margin-top:20px;
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      box-shadow:0 12px 40px rgba(6,10,25,0.06);
+      overflow:hidden;
+    }
+    .hero-inner{display:flex;gap:28px;align-items:center;padding:24px}
+    .hero-left{flex:1;min-width:260px}
+    .kicker{display:inline-block;padding:6px 10px;border-radius:10px;background:linear-gradient(90deg,var(--royal),var(--navy));color:#fff;font-weight:700;font-size:13px}
+    .headline{font-size:28px;margin:12px 0 10px;color:var(--text);line-height:1.08}
+    .lead{color:var(--muted);max-width:640px;margin:0 0 18px}
+
+    .cta-row{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block}
+    .btn-primary{background:linear-gradient(90deg,var(--royal),var(--navy));color:white;box-shadow:0 10px 28px rgba(8,14,40,0.12)}
+    .btn-ghost{background:transparent;border:1px solid rgba(6,10,25,0.06);color:var(--text)}
+
+    /* SLIDESHOW (contained, medium-size) */
+    .slideshow-wrap{
+      width:100%;
+      max-width:720px; /* medium-sized portion */
+      height:360px;
+      border-radius:10px;
+      overflow:hidden;
+      position:relative;
+      background:#f0f4fb;
+      box-shadow:0 12px 40px rgba(6,10,25,0.06);
+    }
+
+    /* track holds slides in row */
+    .slide-track{
+      display:flex;
+      height:100%;
+      gap:var(--slide-gap);
+      align-items:center;
+      /* note: we will animate transform on this element for continuous sliding */
+      transition:transform 600ms cubic-bezier(.22,.9,.31,1);
+      will-change:transform;
+    }
+
+    .slide{
+      flex:0 0 calc((100% - (var(--slide-gap) * 2)) / 3); /* show one slide at a time in medium; but we size to fit visually */
+      min-width:100%;
+      height:100%;
+      display:block;
+      position:relative;
+    }
+    /* slide image */
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* dots (optional small indicator) */
+    .dots{position:absolute;left:50%;transform:translateX(-50%);bottom:10px;display:flex;gap:8px;z-index:10}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.6)}
+    .dot.active{background:white;box-shadow:0 6px 18px rgba(6,10,25,0.12)}
+
+    /* features */
+    .features{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap}
+    .feature{flex:1 1 30%;min-width:220px;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,255,255,0.96));box-shadow:0 8px 28px rgba(6,10,25,0.06)}
+    .feature h4{margin:0 0 8px;color:var(--text)}
+    .feature p{margin:0;color:var(--muted)}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* reveal fade (no slide) */
+    .reveal{opacity:0;transform:translateY(6px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* Responsive behavior */
+    @media (max-width:900px){
+      .hero-inner{flex-direction:column;gap:16px;padding:18px}
+      .slideshow-wrap{height:260px}
+    }
+    @media (max-width:640px){
+      .nav-links{display:none}
+      .hamburger{display:flex}
+      .slideshow-wrap{height:200px;max-width:100%}
+      body{padding:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header" role="banner">
+      <div class="brand" aria-hidden="false">
+        <div class="name">ECOMOC</div>
+        <div class="fullname">Economic Community of Market Operations and Commerce</div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+          <div class="nav-links" id="navLinks">
+            <a class="nav-link" href="index.html" aria-current="page">Home</a>
+            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+        </nav>
+
+        <div class="top-logo" aria-hidden="false">
+          <img src="e-logo.JPG" alt="ECOMOG logo" id="topLogo">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero reveal" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <div class="hero-left">
+            <div class="kicker">Global • Trusted • Secure</div>
+            <h1 class="headline" id="hero-title">Building reliable bridges for trade, investment, and security.</h1>
+            <p class="lead">ECOMOC connects markets and empowers enterprises by delivering professional forex, commerce, facility management and security solutions that meet international standards.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="services.html">View Our Services</a>
+              <a class="btn btn-ghost" href="contact.html">Contact Us</a>
+            </div>
+          </div>
+          <div class="slideshow-wrap" aria-hidden="false" aria-label="Services slideshow">
+            <div id="slideshowViewport" style="width:100%;height:100%;overflow:hidden;position:relative">
+              <div class="slide-track" id="slideTrack" aria-hidden="true">
+                <div class="slide"><img src="forexz.jpeg" alt="Forex service"></div>
+                <div class="slide"><img src="logistics.jpeg" alt="General goods"></div>
+                <div class="slide"><img src="surveillance.jpg" alt="Security service"></div>
+                <div class="slide"><img src="images.jpeg" alt="Security service"></div>
+              </div>
+            </div>
+            <div class="dots" id="dots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="features">
+        <div class="feature reveal"><h4>Professionalism</h4><p>High standards, transparent operations, and results-focused delivery.</p></div>
+        <div class="feature reveal"><h4>Innovation</h4><p>Modern tech and market insight power our solutions.</p></div>
+        <div class="feature reveal"><h4>Partnership</h4><p>Collaborative growth and long-term relationships with clients and partners.</p></div>
+      </div>
+    </main>
+
+    <footer><small>© <span id="year"></span> ECOMOC — Accra, Ghana</small></footer>
+  </div>
+
+  <script>
+  (function(){
+    const bgIntervalMs = 4000;
+    const bgSteps = [
+      ['#000080','#4169E1'],
+      ['#071043','#335fd6'],
+      ['#00114d','#3b6ee6']
+    ];
+    let bgIdx = 0;
+    const body = document.body;
+    function hexToRgb(hex){ const h = hex.replace('#',''); const v = parseInt(h,16); return `${(v>>16)&255},${(v>>8)&255},${v&255}`; }
+    function applyBackground(i){
+      const a = bgSteps[i % bgSteps.length][0], b = bgSteps[i % bgSteps.length][1];
+      body.style.background = `linear-gradient(180deg, rgba(${hexToRgb(a)},0.08), rgba(${hexToRgb(b)},0.02))`;
+    }
+    applyBackground(bgIdx);
+    setInterval(()=>{ bgIdx++; applyBackground(bgIdx); }, bgIntervalMs);
+
+    /* Hamburger menu (mobile) */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    let menuOpen = false;
+    hamburger.addEventListener('click', ()=> {
+      menuOpen = !menuOpen;
+      hamburger.setAttribute('aria-expanded', String(menuOpen));
+      if(menuOpen){
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.right = '18px';
+        navLinks.style.top = '68px';
+        navLinks.style.background = 'var(--card-bg)';
+        navLinks.style.padding = '10px';
+        navLinks.style.borderRadius = '10px';
+        navLinks.style.boxShadow = '0 10px 30px rgba(6,10,25,0.12)';
+        navLinks.style.zIndex = '60';
+      } else {
+        navLinks.style.display = '';
+        navLinks.style.flexDirection = '';
+        navLinks.style.position = '';
+        navLinks.style.top = '';
+        navLinks.style.right = '';
+        navLinks.style.background = '';
+        navLinks.style.padding = '';
+        navLinks.style.borderRadius = '';
+        navLinks.style.boxShadow = '';
+        navLinks.style.zIndex = '';
+      }
+    });
+    window.addEventListener('resize', ()=> {
+      if(window.innerWidth > 640){
+        navLinks.style.display = '';
+        navLinks.style.flexDirection = '';
+        navLinks.style.position = '';
+        navLinks.style.top = '';
+        navLinks.style.right = '';
+        navLinks.style.background = '';
+        navLinks.style.padding = '';
+        navLinks.style.borderRadius = '';
+        navLinks.style.boxShadow = '';
+        navLinks.style.zIndex = '';
+        menuOpen = false;
+        hamburger.setAttribute('aria-expanded','false');
+      }
+    });
+
+    /* Reveal fade-ins (no sliding) */
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* Footer year */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Ensure logo small and ready for your file */
+    const topLogo = document.getElementById('topLogo');
+    if(topLogo){ topLogo.style.height = '46px'; topLogo.style.width = 'auto'; }
+
+    const slideTrack = document.getElementById('slideTrack');
+    const slides = Array.from(slideTrack.children);
+    if(slides.length === 0) return; // nothing to do
+
+    // Clone slides to enable seamless looping. We'll clone all originals and append.
+    const originalCount = slides.length;
+    slides.forEach(node => {
+      const clone = node.cloneNode(true);
+      slideTrack.appendChild(clone);
+    });
+
+    // Compute sizes and positions
+    let slideWidth = slideTrack.children[0].getBoundingClientRect().width + parseFloat(getComputedStyle(slideTrack).gap || 0);
+    let index = 0;
+    const intervalMs = 2000; // 2 seconds per step
+    let animating = false;
+
+    // Recompute width on resize
+    function recompute(){
+      // After resize, get current child width (first child)
+      const childRect = slideTrack.children[0].getBoundingClientRect();
+      const gap = parseFloat(getComputedStyle(slideTrack).gap) || 0;
+      slideWidth = childRect.width + gap;
+      // Reset transform to align exactly to current index (avoid visual glitches)
+      slideTrack.style.transition = 'none';
+      slideTrack.style.transform = `translateX(${-index * slideWidth}px)`;
+      // Force reflow then restore transition
+      void slideTrack.offsetWidth;
+      slideTrack.style.transition = 'transform 600ms cubic-bezier(.22,.9,.31,1)';
+    }
+    window.addEventListener('resize', recompute);
+
+    // Build dots UX (small)
+    const dotsContainer = document.getElementById('dots');
+    if(dotsContainer){
+      dotsContainer.innerHTML = '';
+      for(let i=0;i<originalCount;i++){
+        const dot = document.createElement('div');
+        dot.className = i === 0 ? 'dot active' : 'dot';
+        dot.dataset.index = i;
+        dotsContainer.appendChild(dot);
+        dot.addEventListener('click', ()=> {
+          // Jump to that slide instantly (no stop of loop)
+          index = i;
+          slideTrack.style.transition = 'transform 600ms cubic-bezier(.22,.9,.31,1)';
+          slideTrack.style.transform = `translateX(${-index * slideWidth}px)`;
+          updateDots();
+        });
+      }
+    }
+
+    function updateDots(){
+      if(!dotsContainer) return;
+      const dots = Array.from(dotsContainer.children);
+      dots.forEach(d => d.classList.toggle('active', Number(d.dataset.index) === (index % originalCount)));
+    }
+
+    // Start the continuous stepping loop
+    function stepForward(){
+      // Move to next index
+      index++;
+      slideTrack.style.transition = 'transform 600ms cubic-bezier(.22,.9,.31,1)';
+      slideTrack.style.transform = `translateX(${-index * slideWidth}px)`;
+      updateDots();
+
+      // If we've moved past the original set (index >= originalCount), after the transition ends,
+      // jump back to the equivalent index within the original range without transition.
+      const maxIndexBeforeReset = originalCount * 2; // because we appended originalCount clones
+      if(index >= originalCount){
+        // After the transition completes (~600ms), reset transform to the index within original set
+        setTimeout(()=> {
+          // compute equivalent index within originals
+          const equivalent = index % originalCount;
+          // remove transition, set transform to equivalent
+          slideTrack.style.transition = 'none';
+          slideTrack.style.transform = `translateX(${-equivalent * slideWidth}px)`;
+          // force reflow
+          void slideTrack.offsetWidth;
+          // restore transition
+          slideTrack.style.transition = 'transform 600ms cubic-bezier(.22,.9,.31,1)';
+          // also set the main index to the equivalent so stepping continues naturally
+          index = equivalent;
+          updateDots();
+        }, 650); // slightly longer than CSS transition to avoid flicker
+      }
+    }
+
+    // Initialize positions & computed widths
+    recompute();
+    // ensure starting transform
+    slideTrack.style.transform = `translateX(0px)`;
+
+    // Start interval (never stops)
+    const sliderTimer = setInterval(stepForward, intervalMs);
+
+    // Minimal touch swipe support to let mobile users manually change (but slideshow continues)
+    let touchStartX = 0, touchEndX = 0;
+    let swiping = false;
+    slideTrack.parentElement.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+      swiping = true;
+    }, {passive:true});
+    slideTrack.parentElement.addEventListener('touchend', e => {
+      if(!swiping) return;
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      if(Math.abs(diff) > 40){
+        // left swipe => next, right swipe => prev
+        if(diff < 0) {
+          stepForward();
+        } else {
+          // move backward one (we simulate by decrementing index)
+          index = (index - 1 + originalCount) % originalCount;
+          slideTrack.style.transition = 'transform 600ms cubic-bezier(.22,.9,.31,1)';
+          slideTrack.style.transform = `translateX(${-index * slideWidth}px)`;
+          updateDots();
+        }
+      }
+      swiping = false;
+    }, {passive:true});
+
+    // (No hover pause) — intentionally never stopping per your request
+
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- Basic CSP for security (adjust when deploying) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ECOMOG — Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#000080;
+      --royal:#4169E1;
+      --text:#0a0f1a;
+      --muted:#6c7180;
+      --card-bg: rgba(255,255,255,0.98);
+      --glass: rgba(255,255,255,0.04);
+      --accent: linear-gradient(90deg,var(--royal),var(--navy));
+      --radius:14px;
+      --max-width:1100px;
+      font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      margin:0;
+      padding:26px;
+      color:var(--text);
+      background:linear-gradient(180deg, rgba(0,0,128,0.06), rgba(65,105,225,0.02));
+      transition:background 1s linear;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .page{max-width:var(--max-width);margin:0 auto}
+
+    /* Header */
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;flex-direction:column}
+    .brand .name{font-size:20px;font-weight:700;margin:0}
+    .brand .fullname{font-size:12px;color:var(--muted);margin-top:4px}
+
+    nav.navbar{display:flex;align-items:center;gap:14px}
+    .nav-links{display:flex;gap:10px;align-items:center}
+    .nav-link{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    .nav-link:hover{background:var(--glass)}
+
+    .hamburger{display:none;width:44px;height:44px;border-radius:8px;align-items:center;justify-content:center;background:var(--card-bg);border:1px solid rgba(6,10,25,0.04);cursor:pointer}
+    .hamburger span{display:block;width:18px;height:2px;background:var(--text);position:relative}
+    .hamburger span::before,.hamburger span::after{content:"";position:absolute;width:18px;height:2px;background:var(--text);left:0}
+    .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
+
+    .top-logo img{height:48px;width:auto;border-radius:8px;box-shadow:0 8px 22px rgba(6,10,25,0.12)}
+
+    /* Contact card */
+    main{margin-top:28px}
+    .contact-card{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:0 16px 48px rgba(6,10,25,0.08);
+    }
+
+    .contact-title{font-size:26px;color:var(--royal);margin:0 0 8px}
+    .contact-sub{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    /* Individual line item */
+    .contact-item{
+      background:var(--glass);
+      border-radius:12px;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-height:100%;
+    }
+
+    .item-head{font-size:16px;font-weight:700;color:var(--text);margin:0}
+    .item-line{font-size:16px;color:var(--royal);font-weight:600;text-decoration:none;word-break:break-word}
+    .item-desc{font-size:14px;color:var(--muted);margin:0}
+
+    /* Divider style */
+    .divider{height:1px;background:linear-gradient(90deg, rgba(10,14,30,0.06), rgba(10,14,30,0.02));margin:20px 0;border-radius:2px}
+
+    /* Map placeholder */
+    .map-placeholder{
+      margin-top:18px;
+      border-radius:12px;
+      padding:18px;
+      background:linear-gradient(180deg, rgba(245,247,250,0.9), rgba(255,255,255,0.9));
+      border:1px solid rgba(6,10,25,0.03);
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .contact-grid{grid-template-columns: 1fr}
+      body{padding:18px}
+      .top-logo img{height:44px}
+      .nav-links{display:none}
+      .hamburger{display:flex}
+    }
+
+    /* subtle reveal */
+    .reveal{opacity:0;transform:translateY(6px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header" role="banner" aria-label="Top">
+      <div class="brand">
+        <div class="name">ECOMOC</div>
+        <div class="fullname">Economic Community of Market Operations and Commerce</div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+          <div class="nav-links" id="navLinks">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="contact.html" aria-current="page">Contact</a>
+          </div>
+
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+        </nav>
+
+        <div class="top-logo" aria-hidden="false">
+          <!-- INSERT YOUR ECOMOG LOGO HERE -->
+          <!-- Place your logo image at assets/logo.png -->
+          <img src="e-logo.JPG" alt="ECOMOG logo" id="topLogo">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="contact-card reveal" aria-labelledby="contact-title">
+        <h1 id="contact-title" class="contact-title">Get in Touch with ECOMOC</h1>
+        <p class="contact-sub">We welcome business inquiries, partnerships and investment discussions. Use any of the official channels below and we will respond promptly.</p>
+
+        <div class="contact-grid">
+          <!-- Left column -->
+          <div class="contact-item" role="region" aria-labelledby="location-head">
+            <div class="item-head" id="location-head">Location</div>
+            <a class="item-line" href="https://www.google.com/maps/search/Accra+Ghana" target="_blank" rel="noopener noreferrer">Accra, Ghana</a>
+            <p class="item-desc">Visit us or schedule an appointment at our head office.</p>
+          </div>
+
+          <!-- Right column -->
+          <div>
+            <div class="contact-item" role="region" aria-labelledby="tel-head">
+              <div class="item-head" id="tel-head">Phone</div>
+              <a class="item-line" href="tel:+233372096683">+233 372096683</a>
+              <a class="item-line" href="tel:+233598978686">+233 598978686</a>
+              <p class="item-desc">Call our offices for prompt assistance and partnership enquiries.</p>
+            </div>
+
+            <div class="divider" aria-hidden="true"></div>
+
+            <div class="contact-item" role="region" aria-labelledby="email-head">
+              <div class="item-head" id="email-head">Email</div>
+              <a class="item-line" href="mailto:ecomoctrade@gmail.com">ecomoctrade@gmail.com</a>
+              <p class="item-desc">Send us a detailed message and we will reply as soon as possible.</p>
+            </div>
+
+            <div class="divider" aria-hidden="true"></div>
+
+            <div class="contact-item" role="region" aria-labelledby="social-head">
+              <div class="item-head" id="social-head">Social Media (links)</div>
+              <a class="item-line" href="https://facebook.com/Ecomoc" target="_blank" rel="noopener noreferrer">facebook.com/Ecomoc</a>
+              <a class="item-line" href="https://twitter.com/Ecomoc" target="_blank" rel="noopener noreferrer">twitter.com/Ecomoc</a>
+              <a class="item-line" href="https://linkedin.com/company/Ecomoc" target="_blank" rel="noopener noreferrer">linkedin.com/company/Ecomoc</a>
+              <p class="item-desc">Follow and message us on social platforms for updates and business news.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder" role="note">Find us in Accra, Ghana — head office location. (Replace with embedded map if you want later.)</div>
+      </section>
+    </main>
+
+    <footer>
+      <small>© <span id="year"></span> ECOMOC — Accra, Ghana</small>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      // Dynamic background (Navy <-> Royal) every 4s
+      const intervalMs = 4000;
+      const steps = [
+        ['#000080','#4169E1'],
+        ['#071043','#335fd6'],
+        ['#00114d','#3b6ee6']
+      ];
+      let idx = 0;
+      const body = document.body;
+      function hexToRgb(hex){const h=hex.replace('#','');const v=parseInt(h,16);return`${(v>>16)&255},${(v>>8)&255},${v&255}`;}
+      function applyGradient(i){
+        const a = steps[i % steps.length][0];
+        const b = steps[i % steps.length][1];
+        body.style.background = `linear-gradient(180deg, rgba(${hexToRgb(a)},0.08), rgba(${hexToRgb(b)},0.02))`;
+      }
+      applyGradient(idx);
+      setInterval(()=>{ idx++; applyGradient(idx); }, intervalMs);
+
+      // reveal fade-in
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      },{threshold:0.12});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+      // mobile hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      let menuOpen = false;
+      if(hamburger){
+        hamburger.addEventListener('click', ()=> {
+          menuOpen = !menuOpen;
+          hamburger.setAttribute('aria-expanded', String(menuOpen));
+          if(menuOpen){
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.right = '18px';
+            navLinks.style.top = '68px';
+            navLinks.style.background = 'var(--card-bg)';
+            navLinks.style.padding = '10px';
+            navLinks.style.borderRadius = '10px';
+            navLinks.style.boxShadow = '0 10px 30px rgba(6,10,25,0.12)';
+            navLinks.style.zIndex = '60';
+          } else {
+            navLinks.style.display = '';
+            navLinks.style.flexDirection = '';
+            navLinks.style.position = '';
+            navLinks.style.top = '';
+            navLinks.style.right = '';
+            navLinks.style.background = '';
+            navLinks.style.padding = '';
+            navLinks.style.borderRadius = '';
+            navLinks.style.boxShadow = '';
+            navLinks.style.zIndex = '';
+          }
+        });
+      }
+
+      // restore nav on desktop
+      window.addEventListener('resize', ()=> {
+        if(window.innerWidth > 900){
+          navLinks.style.display = '';
+          navLinks.style.flexDirection = '';
+          navLinks.style.position = '';
+          navLinks.style.top = '';
+          navLinks.style.right = '';
+          navLinks.style.background = '';
+          navLinks.style.padding = '';
+          navLinks.style.borderRadius = '';
+          navLinks.style.boxShadow = '';
+          navLinks.style.zIndex = '';
+          menuOpen = false;
+          hamburger && hamburger.setAttribute('aria-expanded','false');
+        }
+      });
+
+      // footer year + logo size
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const topLogo = document.getElementById('topLogo');
+      if(topLogo){ topLogo.style.height = '48px'; topLogo.style.width = 'auto'; }
+    })();
+  </script>
+</body>
+</html>

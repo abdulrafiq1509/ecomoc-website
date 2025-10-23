@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ECOMOC — Services</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#000080;
+      --royal:#4169E1;
+      --text:#0a0f1a;
+      --muted:#6c7180;
+      --card-bg: rgba(255,255,255,0.98);
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1250px;
+      --gap:20px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      margin:0;padding:24px;
+      color:var(--text);
+      background: linear-gradient(180deg, rgba(0,0,128,0.06), rgba(65,105,225,0.02));
+      transition: background 1200ms ease;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .page{max-width:var(--max-width);margin:0 auto}
+
+    /* Header */
+    header.site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{display:flex;flex-direction:column}
+    .brand .name{margin:0;font-size:20px;font-weight:700}
+    .brand .fullname{margin-top:4px;font-size:12px;color:var(--muted)}
+
+    nav.main-nav{display:flex;gap:12px;align-items:center}
+    .nav-link{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    .nav-link:hover{background:var(--glass)}
+
+    /* hamburger */
+    .hamburger{display:none;width:44px;height:44px;border-radius:8px;align-items:center;justify-content:center;background:var(--card-bg);border:1px solid rgba(6,10,25,0.04);cursor:pointer}
+    .hamburger span{display:block;width:18px;height:2px;background:var(--text);position:relative}
+    .hamburger span::before,.hamburger span::after{content:"";position:absolute;width:18px;height:2px;background:var(--text);left:0}
+    .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
+
+    .top-logo img{height:48px;width:auto;border-radius:8px;box-shadow:0 8px 22px rgba(6,10,25,0.12)}
+
+    /* page header/title */
+    .hero{margin-top:20px;border-radius:var(--radius);background:var(--card-bg);padding:26px;box-shadow:0 12px 40px rgba(6,10,25,0.06)}
+    .hero h1{margin:0;font-size:28px;color:var(--royal)}
+    .hero p{margin:10px 0 0;color:var(--muted);font-size:15px}
+
+    /* Service sections */
+    section.service-section{margin-top:28px}
+    .section-card{
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+      box-shadow:0 12px 40px rgba(6,10,25,0.06);
+      padding:22px;
+    }
+    .section-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .section-head h2{margin:0;font-size:20px;color:var(--text);padding-left:10px;border-left:5px solid var(--royal)}
+    .section-intro{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+    /* grid for images */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:var(--gap);
+      align-items:start;
+    }
+
+    /* but adapt for the group with 4 images */
+    .grid-4{
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .svc-card{
+      background:var(--glass);
+      border-radius:12px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      transition: transform 280ms ease, box-shadow 280ms ease;
+    }
+    .svc-card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(6,10,25,0.12)}
+
+    .svc-media{
+      width:100%;
+      height:260px;
+      background:#efeff5;
+      display:block;
+      object-fit:cover;
+    }
+    .svc-title{
+      padding:14px;
+      font-weight:700;
+      color:var(--text);
+      font-size:16px;
+      text-align:center;
+    }
+    .svc-desc{
+      padding:0 14px 18px;
+      color:var(--muted);
+      font-size:15px;
+      text-align:center;
+    }
+
+    /* For smaller screens */
+    @media (max-width:1100px){
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      .grid-4{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width:700px){
+      body{padding:18px}
+      .grid, .grid-4{grid-template-columns: 1fr}
+      .svc-media{height:220px}
+      .top-logo img{height:44px}
+      .nav-links{display:none}
+      .hamburger{display:flex}
+    }
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* reveal subtle */
+    .reveal{opacity:0;transform:translateY(6px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <div class="name">ECOMOC</div>
+        <div class="fullname">Economic Community of Market Operations and Commerce</div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav class="main-nav" role="navigation" aria-label="Main">
+          <div class="nav-links" id="navLinks">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="services.html" aria-current="page">Services</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+
+          <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+        </nav>
+
+        <div class="top-logo">
+          <img src="e-logo.JPG" alt="ECOMOG logo" id="topLogo">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero reveal">
+        <h1>Our Services</h1>
+        <p>ECOMOC provides professional solutions across Forex Trading & Investment, General Goods & Services (including facility management), and Security Services. Below are our core offerings — click into Services page to explore each service in detail.</p>
+      </div>
+
+      <!-- Forex (3) -->
+      <section class="service-section reveal" aria-labelledby="forex-title">
+        <div class="section-card">
+          <div class="section-head"><h2 id="forex-title">Forex Trading & Investment</h2></div>
+          <p class="section-intro">Currency trading, investment advisory and portfolio services tailored for institutional and retail clients.</p>
+
+          <div class="grid" role="list" aria-label="Forex services">
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="currency trading.jpg" alt="Currency trading and exchange operations">
+              <div class="svc-title">Currency Trading & Exchange Operations</div>
+              <div class="svc-desc">Fast, compliant currency exchange operations and liquidity services for diverse clients.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="consultancy.jpg" alt="Market analysis and investment consultancy">
+              <div class="svc-title">Market Analysis & Investment Consultancy</div>
+              <div class="svc-desc">Actionable market research and investment advice to optimise returns and manage risk.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="digital training.jpg" alt="Digital trading and portfolio management">
+              <div class="svc-title">Digital Trading & Portfolio Management</div>
+              <div class="svc-desc">Secure digital trading platforms, portfolio structuring and ongoing performance monitoring.</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- General Goods (4) -->
+      <section class="service-section reveal" aria-labelledby="goods-title">
+        <div class="section-card">
+          <div class="section-head"><h2 id="goods-title">General Goods & Services</h2></div>
+          <p class="section-intro">Comprehensive procurement, distribution and facility services — we help move products and manage resources efficiently.</p>
+
+          <div class="grid grid-4" role="list" aria-label="General goods services">
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="import.jpg" alt="Import and export of quality products">
+              <div class="svc-title">Import & Export of Quality Products</div>
+              <div class="svc-desc">Sourcing and international trade services to bring trusted products to market.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="logistics.jpeg" alt="Procurement and logistics management">
+              <div class="svc-title">Procurement & Logistics Management</div>
+              <div class="svc-desc">End-to-end procurement and logistics that reduce cost and improve delivery reliability.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="wholesale.jpg" alt="Wholesale and retail distribution">
+              <div class="svc-title">Wholesale & Retail Distribution</div>
+              <div class="svc-desc">Scalable distribution networks for broad market reach and efficient retail supply.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="facility.jpg" alt="Facility management">
+              <div class="svc-title">Facility Management</div>
+              <div class="svc-desc">Comprehensive facility services to ensure safe, efficient and well-maintained operations.</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security (3) -->
+      <section class="service-section reveal" aria-labelledby="security-title">
+        <div class="section-card">
+          <div class="section-head"><h2 id="security-title">Security Services</h2></div>
+          <p class="section-intro">Professional security solutions designed to protect people, property and operations.</p>
+
+          <div class="grid" role="list" aria-label="Security services">
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="private secu.jpg" alt="Corporate and private security management">
+              <div class="svc-title">Corporate & Private Security Management</div>
+              <div class="svc-desc">Trained security personnel and operational management for corporate and private clients.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="risk.jpg" alt="Security consultancy and risk management">
+              <div class="svc-title">Security Consultancy & Risk Assessment</div>
+              <div class="svc-desc">Risk analysis, policy design and consultancy to reduce exposure and protect assets.</div>
+            </article>
+
+            <article class="svc-card" role="listitem">
+              <img class="svc-media" src="surveillance.jpg" alt="Surveillance and safety technology solutions">
+              <div class="svc-title">Surveillance & Safety Technology Solutions</div>
+              <div class="svc-desc">Integrated surveillance and safety tech to monitor environments and deter incidents.</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer><small>© <span id="year"></span> ECOMOC — Accra, Ghana</small></footer>
+  </div>
+
+  <script>
+    (function(){
+      // Background rotation (navy <-> royal) - keep consistent with other pages
+      const steps = [
+        ['#000080','#4169E1'],
+        ['#071043','#335fd6'],
+        ['#00114d','#3b6ee6']
+      ];
+      let idx = 0;
+      const body = document.body;
+      function hexToRgb(hex){ const h = hex.replace('#',''); const v = parseInt(h,16); return `${(v>>16)&255},${(v>>8)&255},${v&255}`; }
+      function applyGradient(i){
+        const a = steps[i % steps.length][0], b = steps[i % steps.length][1];
+        body.style.background = `linear-gradient(180deg, rgba(${hexToRgb(a)},0.08), rgba(${hexToRgb(b)},0.02))`;
+      }
+      applyGradient(idx);
+      setInterval(()=>{ idx++; applyGradient(idx); }, 4000);
+
+      // Reveal fade-in without sliding
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+      // mobile hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      let menuOpen = false;
+      hamburger && hamburger.addEventListener('click', ()=>{
+        menuOpen = !menuOpen;
+        hamburger.setAttribute('aria-expanded', String(menuOpen));
+        if(menuOpen){
+          navLinks.style.display = 'flex';
+          navLinks.style.flexDirection = 'column';
+          navLinks.style.position = 'absolute';
+          navLinks.style.right = '18px';
+          navLinks.style.top = '68px';
+          navLinks.style.background = 'var(--card-bg)';
+          navLinks.style.padding = '10px';
+          navLinks.style.borderRadius = '10px';
+          navLinks.style.boxShadow = '0 10px 30px rgba(6,10,25,0.12)';
+          navLinks.style.zIndex = '60';
+        } else {
+          navLinks.style.display = '';
+          navLinks.style.flexDirection = '';
+          navLinks.style.position = '';
+          navLinks.style.top = '';
+          navLinks.style.right = '';
+          navLinks.style.background = '';
+          navLinks.style.padding = '';
+          navLinks.style.borderRadius = '';
+          navLinks.style.boxShadow = '';
+          navLinks.style.zIndex = '';
+        }
+      });
+
+      // restore nav on resize
+      window.addEventListener('resize', ()=> {
+        if(window.innerWidth > 700){
+          navLinks.style.display = '';
+          navLinks.style.flexDirection = '';
+          navLinks.style.position = '';
+          navLinks.style.top = '';
+          navLinks.style.right = '';
+          navLinks.style.background = '';
+          navLinks.style.padding = '';
+          navLinks.style.borderRadius = '';
+          navLinks.style.boxShadow = '';
+          navLinks.style.zIndex = '';
+          menuOpen = false;
+          hamburger && hamburger.setAttribute('aria-expanded','false');
+        }
+      });
+
+      // footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // ensure logo element size
+      const topLogo = document.getElementById('topLogo');
+      if(topLogo){ topLogo.style.height = '48px'; topLogo.style.width = 'auto'; }
+    })();
+  </script>
+</body>
+</html>
